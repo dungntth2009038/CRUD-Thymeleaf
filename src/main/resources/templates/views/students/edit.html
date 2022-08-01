@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+    <!--    <link rel="stylesheet" href="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">-->
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    form {
+        text-align: center;
+    }
+
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+
+    input[type=text], input[type=password], select {
+        display: inline-block;
+        width: 200px;
+    }
+
+    input[type=radio] {
+        margin-left: 45px;
+    }
+
+    input[type=checkbox] {
+        margin-right: 190px;
+    }
+
+    button {
+        padding: 5px;
+        margin: 10px;
+    }
+
+    p {
+        color: red;
+    }
+</style>
+<h1 style="text-align: center">[[${pageTitle}]]</h1>
+</body>
+
+<form action="#" th:action="@{/admin/students/create}" method="post" th:object="${student}">
+    <label >RollNumber:</label>
+    <p th:if="${#fields.hasErrors('rollNumber')}" th:errorclass="error" th:errors="*{rollNumber}"></p>
+    <input type="text" th:field="*{rollNumber}"/><br/>
+    <label>Full name:</label>
+    <input type="text" th:field="*{fullName}"/><br/>
+    <p th:if="${#fields.hasErrors('fullName')}" th:errorclass="error" th:errors="*{fullName}"></p>
+
+
+    <label>E-mail:</label>
+    <input type="text" th:field="*{email}"/><br/>
+    <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
+
+    <label>Password:</label>
+    <input type="password" th:field="*{password}"/><br/>
+    <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+
+
+    <label style="margin-left: -87px">Birthday (yyyy-mm-dd):</label>
+    <input type="date" th:field="*{birthday}"/><br/>
+
+    <label>Gender:</label>
+    <input type="radio" th:field="*{gender}" value="Male"/>Male
+    <input type="radio" th:field="*{gender}" value="Female"/>Female<br/>
+
+    <label>Profession:</label>
+    <select th:field="*{profession}">
+        <option th:each="p : ${professional}" th:value="${p}" th:text="${p}"/>
+    </select>
+    <br/>
+
+    <label>Married?</label>
+    <input type="checkbox" th:field="*{married}"/><br/>
+
+    <label>Note:</label>
+    <textarea rows="5" cols="25" th:field="*{note}"></textarea>
+    <br/>
+
+    <button type="submit">Register</button>
+    <button type="reset">Reset</button>
+</form>

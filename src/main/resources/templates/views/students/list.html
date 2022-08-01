@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<style>
+    h1 {
+        text-align: center;
+    }
+</style>
+<h1>List Registration</h1>
+<div class="h3" style="text-align: center">
+    <a  href="/admin/students/create">Add new user</a>
+</div>
+<div th:if="${message}" class="alert alert-success text-center">[[${message}]]</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th> Roll Number</th>
+        <th> Full name:</th>
+        <th> E-mail:</th>
+        <th> Password:</th>
+        <th> Birthday (yyyy-mm-dd):</th>
+        <th> Gender:</th>
+<!--        <th> Profession:</th>-->
+<!--        <th> Married?</th>-->
+<!--        <th> Note:</th>-->
+        <th> Phone:</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${studentPageable.empty}">
+        <td colspan="2" style="color: red"> No Student Available</td>
+    </tr>
+    <tr th:each="student : ${studentPageable}">
+        <td><span th:text="${student.rollNumber}"> RollNumber </span></td>
+        <td><span th:text="${student.fullName}"> FullName </span></td>
+        <td><span th:text="${student.email}"> Email </span></td>
+        <td><span th:text="${student.password}"> Password </span></td>
+        <td><span th:text="${student.birthday}"> Birthday </span></td>
+        <td><span th:text="${student.gender}"> Gender </span></td>
+        <td><span th:text="${student.phone}"> Phone </span></td>
+<!--        <td><span th:text="${student.profession}"> Profession </span></td>-->
+<!--        <td><span th:text="${student.married}"> Married </span></td>-->
+<!--        <td><span th:text="${student.note}"> Note </span></td>-->
+        <td>
+            <a th:href="@{'/admin/students/edit/' + ${student.rollNumber}}">Edit</a>
+            <a href="#" class="btn-delete" th:attr="data-id=${student.rollNumber}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (){
+            const listDeleteButton = document.querySelectorAll('.btn-delete');
+            alert(1);
+            for (let i = 0; i < listDeleteButton.length; i++) {
+                listDeleteButton[i].onclick = function (event){
+                    event.preventDefault(); // click vào nút không xảy ra chuyện gì.
+                    if(confirm('Are you sure')){
+                        const currentId = listDeleteButton[i].getAttribute('data-id');
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.open("DELETE", `http://localhost:8080/admin/students/delete/${currentId}`, true);
+                        xhttp.onload = function () {
+                            window.location.replace('http://localhost:8080/admin/students/list');
+                        };
+                        xhttp.send();
+                    }
+
+                }
+            }
+        })
+    </script>
+</table>
+</body>
+</html>

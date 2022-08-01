@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <!--    <link rel="stylesheet" href="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">-->
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    .gradient-custom-3 {
+        /* fallback for old browsers */
+        background: #84fab0;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+    }
+
+    .gradient-custom-4 {
+        /* fallback for old browsers */
+        background: #84fab0;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+    }
+</style>
+<!--<style>-->
+<!--    /*form {*/-->
+<!--    /*    text-align: center;*/-->
+<!--    /*}*/-->
+
+<!--    /*label {*/-->
+<!--    /*    display: inline-block;*/-->
+<!--    /*    width: 200px;*/-->
+<!--    /*    margin: 5px;*/-->
+<!--    /*    text-align: left;*/-->
+<!--    /*}*/-->
+
+<!--    input[type=text], input[type=password], select {-->
+<!--        display: inline-block;-->
+<!--        width: 200px;-->
+<!--    }-->
+
+<!--    input[type=radio] {-->
+<!--        margin-left: 45px;-->
+<!--    }-->
+
+<!--    input[type=checkbox] {-->
+<!--        margin-right: 190px;-->
+<!--    }-->
+
+<!--    button {-->
+<!--        padding: 5px;-->
+<!--        margin: 10px;-->
+<!--    }-->
+
+<!--    p {-->
+<!--        color: red;-->
+<!--    }-->
+<!--</style>-->
+<!--<h1 style="text-align: center">User Registration</h1>-->
+</form>
+
+<!--<form action="#" th:action="@{/admin/students/create}" method="post" th:object="${student}">-->
+<!--    <label >RollNumber:</label>-->
+<!--    <p th:if="${#fields.hasErrors('rollNumber')}" th:errorclass="error" th:errors="*{rollNumber}"></p>-->
+<!--    <input type="text" th:field="*{rollNumber}"/><br/>-->
+<!--    <label>Full name:</label>-->
+<!--    <input type="text" th:field="*{fullName}"/><br/>-->
+<!--    <p th:if="${#fields.hasErrors('fullName')}" th:errorclass="error" th:errors="*{fullName}"></p>-->
+
+
+<!--    <label>E-mail:</label>-->
+<!--    <input type="text" th:field="*{email}"/><br/>-->
+<!--    <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>-->
+
+<!--    <label>Password:</label>-->
+<!--    <input type="password" th:field="*{password}"/><br/>-->
+<!--    <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>-->
+
+
+<!--    <label style="margin-left: -87px">Birthday (yyyy-mm-dd):</label>-->
+<!--    <input type="date" th:field="*{birthday}"/><br/>-->
+
+<!--    <label>Gender:</label>-->
+<!--    <input type="radio" th:field="*{gender}" value="Male"/>Male-->
+<!--    <input type="radio" th:field="*{gender}" value="Female"/>Female<br/>-->
+
+<!--    <label>Profession:</label>-->
+<!--    <select th:field="*{profession}">-->
+<!--        <option th:each="p : ${professional}" th:value="${p}" th:text="${p}"/>-->
+<!--    </select>-->
+<!--    <br/>-->
+
+<!--    <label>Married?</label>-->
+<!--    <input type="checkbox" th:field="*{married}"/><br/>-->
+
+<!--    <label>Note:</label>-->
+<!--    <textarea rows="5" cols="25" th:field="*{note}"></textarea>-->
+<!--    <br/>-->
+
+<!--    <button type="submit">Register</button>-->
+<!--    <button type="reset">Reset</button>-->
+<!--</form>-->
+
+
+<!--<form action="#" th:action="@{/admin/students/create}" method="post" th:object="${student}">-->
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+    *, body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #152733;
+    }
+
+    html, body {
+        height: 100%;
+        background-color: #152733;
+        overflow: hidden;
+    }
+
+
+    .form-holder {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+    }
+
+    .form-holder .form-content {
+        position: relative;
+        text-align: center;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+        padding: 60px;
+    }
+
+    .form-content .form-items {
+        border: 3px solid #fff;
+        padding: 40px;
+        display: inline-block;
+        width: 100%;
+        min-width: 540px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        text-align: left;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+    }
+
+    .form-content h3 {
+        color: #fff;
+        text-align: left;
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .form-content h3.form-title {
+        margin-bottom: 30px;
+    }
+
+    .form-content p {
+        color: #fff;
+        text-align: left;
+        font-size: 17px;
+        font-weight: 300;
+        line-height: 20px;
+        margin-bottom: 30px;
+    }
+
+
+    .form-content label, .was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+        color: #fff;
+    }
+
+    .form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+        width: 100%;
+        padding: 9px 20px;
+        text-align: left;
+        border: 0;
+        outline: 0;
+        border-radius: 6px;
+        background-color: #fff;
+        font-size: 15px;
+        font-weight: 300;
+        color: #8D8D8D;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        margin-top: 16px;
+    }
+
+
+    .btn-primary {
+        background-color: #6C757D;
+        outline: none;
+        border: 0px;
+        box-shadow: none;
+    }
+
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+        background-color: #495056;
+        outline: none !important;
+        border: none !important;
+        box-shadow: none;
+    }
+
+    .form-content textarea {
+        position: static !important;
+        width: 100%;
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-align: left;
+        background-color: #fff;
+        border: 0;
+        font-size: 15px;
+        font-weight: 300;
+        color: #8D8D8D;
+        outline: none;
+        resize: none;
+        height: 120px;
+        -webkit-transition: none;
+        transition: none;
+        margin-bottom: 14px;
+    }
+
+    .form-content textarea:hover, .form-content textarea:focus {
+        border: 0;
+        background-color: #ebeff8;
+        color: #8D8D8D;
+    }
+
+    .mv-up {
+        margin-top: -9px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .invalid-feedback {
+        color: #ff606e;
+    }
+
+    .valid-feedback {
+        color: #2acc80;
+    }
+</style>
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Register Today</h3>
+                    <p>Fill in the data below.</p>
+                    <form class="requires-validation" action="#" th:action="@{/admin/students/create}" method="post"
+                          th:object="${student}" novalidate>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="text" name="name" placeholder="Roll Number" required
+                                   th:field="*{rollNumber}">
+                            <div class="valid-feedback">Rollnumber field is valid!</div>
+                            <div class="invalid-feedback">Rollnumber field cannot be blank!
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="name" placeholder="Full Name" required
+                                       th:field="*{fullName}">
+                                <div class="valid-feedback">Username field is valid!</div>
+                                <div class="invalid-feedback">Username field cannot be blank!</div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="email" name="email" placeholder="E-mail Address"
+                                       required th:field="*{email}">
+                                <div class="valid-feedback">Email field is valid!</div>
+                                <div class="invalid-feedback">Email field cannot be blank!</div>
+                            </div>
+
+                            <!--                        <div class="col-md-12">-->
+                            <!--                            <select class="form-select mt-3" required>-->
+                            <!--                                <option selected disabled value="">Position</option>-->
+                            <!--                                <option value="jweb">Junior Web Developer</option>-->
+                            <!--                                <option value="sweb">Senior Web Developer</option>-->
+                            <!--                                <option value="pmanager">Project Manager</option>-->
+                            <!--                            </select>-->
+                            <!--                            <div class="valid-feedback">You selected a position!</div>-->
+                            <!--                            <div class="invalid-feedback">Please select a position!</div>-->
+                            <!--                        </div>-->
+
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="password" name="password" placeholder="Password"
+                                       required>
+                                <div class="valid-feedback">Password field is valid!</div>
+                                <div class="invalid-feedback">Password field cannot be blank!</div>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <input class="form-control" type="date" name="date" placeholder="Birthday"
+                                       required>
+                                <div class="valid-feedback">Birthday field is valid!</div>
+                                <div class="invalid-feedback">Birthday field cannot be blank!</div>
+                            </div>
+
+
+                            <div class="col-md-12 mt-3">
+                                <label class="mb-3 mr-1">Gender: </label>
+
+                                <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off"
+                                       required>
+                                <label class="btn btn-sm btn-outline-secondary" for="male">Male</label>
+
+                                <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off"
+                                       required>
+                                <label class="btn btn-sm btn-outline-secondary" for="female">Female</label>
+
+                                <input type="radio" class="btn-check" name="gender" id="secret" autocomplete="off"
+                                       required>
+                                <label class="btn btn-sm btn-outline-secondary" for="secret">Secret</label>
+                                <div class="valid-feedback mv-up">You selected a gender!</div>
+                                <div class="invalid-feedback mv-up">Please select a gender!</div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="date" placeholder="Phone"
+                                       required>
+                                <div class="valid-feedback">Phone field is valid!</div>
+                                <div class="invalid-feedback">Phone field cannot be blank!</div>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                <label class="form-check-label">I confirm that all data are correct</label>
+                                <div class="invalid-feedback">Please confirm that the entered data are all correct!
+                                </div>
+                            </div>
+                            <div class="form-button mt-3">
+                                <button id="submit" type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+</script>
+</body>
+</html>
